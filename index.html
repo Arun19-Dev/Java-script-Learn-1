@@ -1,0 +1,2582 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive JavaScript Learning Platform — Master JS concepts with detailed explanations, real-time code examples, hands-on practice, and quizzes. Perfect for absolute beginners.">
+    <meta name="keywords" content="JavaScript, Learn JavaScript, JS Tutorial, Interactive Coding, Web Development, Beginner JavaScript">
+    <title>LearnJS — Interactive JavaScript Learning Platform for Beginners</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="loader-icon">
+                <span class="loader-bracket">{</span>
+                <span class="loader-text">JS</span>
+                <span class="loader-bracket">}</span>
+            </div>
+            <p class="loader-msg">Loading your learning environment...</p>
+            <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Mobile Header -->
+    <header class="mobile-header" id="mobileHeader">
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="mobile-logo">
+            <span class="logo-icon">{JS}</span>
+            <span>LearnJS</span>
+        </div>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" aria-label="Toggle dark mode">
+            <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></g></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">{JS}</span>
+                <h1 class="logo-text">LearnJS</h1>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></g></svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+        </div>
+
+        <!-- Progress -->
+        <div class="sidebar-progress">
+            <div class="progress-info">
+                <span>Your Progress</span>
+                <span class="progress-pct" id="progressPct">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-bar-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Nav -->
+        <nav class="sidebar-nav" id="sidebarNav">
+            <div class="nav-group">
+                <span class="nav-group-label">Fundamentals</span>
+                <a href="#basics" class="nav-item active" data-section="basics" id="nav-basics">
+                    <span class="nav-icon">📦</span>
+                    <span class="nav-label">JS Basics</span>
+                    <span class="nav-check" id="check-basics">✓</span>
+                </a>
+                <a href="#arrays" class="nav-item" data-section="arrays" id="nav-arrays">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-label">Arrays & Objects</span>
+                    <span class="nav-check" id="check-arrays">✓</span>
+                </a>
+                <a href="#controlflow" class="nav-item" data-section="controlflow" id="nav-controlflow">
+                    <span class="nav-icon">🔀</span>
+                    <span class="nav-label">Loops & Conditions</span>
+                    <span class="nav-check" id="check-controlflow">✓</span>
+                </a>
+                <a href="#functions" class="nav-item" data-section="functions" id="nav-functions">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-label">Functions</span>
+                    <span class="nav-check" id="check-functions">✓</span>
+                </a>
+            </div>
+            <div class="nav-group">
+                <span class="nav-group-label">Advanced</span>
+                <a href="#oop" class="nav-item" data-section="oop" id="nav-oop">
+                    <span class="nav-icon">🏗️</span>
+                    <span class="nav-label">OOP</span>
+                    <span class="nav-check" id="check-oop">✓</span>
+                </a>
+                <a href="#promises" class="nav-item" data-section="promises" id="nav-promises">
+                    <span class="nav-icon">🔗</span>
+                    <span class="nav-label">Promises</span>
+                    <span class="nav-check" id="check-promises">✓</span>
+                </a>
+                <a href="#async" class="nav-item" data-section="async" id="nav-async">
+                    <span class="nav-icon">⏳</span>
+                    <span class="nav-label">Async/Await</span>
+                    <span class="nav-check" id="check-async">✓</span>
+                </a>
+                <a href="#errorhandling" class="nav-item" data-section="errorhandling" id="nav-errorhandling">
+                    <span class="nav-icon">🛡️</span>
+                    <span class="nav-label">Error Handling</span>
+                    <span class="nav-check" id="check-errorhandling">✓</span>
+                </a>
+            </div>
+            <div class="nav-group">
+                <span class="nav-group-label">Browser</span>
+                <a href="#dom" class="nav-item" data-section="dom" id="nav-dom">
+                    <span class="nav-icon">🎯</span>
+                    <span class="nav-label">DOM Manipulation</span>
+                    <span class="nav-check" id="check-dom">✓</span>
+                </a>
+            </div>
+            <div class="nav-group">
+                <span class="nav-group-label">Assess</span>
+                <a href="#practice" class="nav-item" data-section="practice" id="nav-practice">
+                    <span class="nav-icon">💪</span>
+                    <span class="nav-label">Practice</span>
+                    <span class="nav-check" id="check-practice">✓</span>
+                </a>
+                <a href="#quiz" class="nav-item" data-section="quiz" id="nav-quiz">
+                    <span class="nav-icon">🧠</span>
+                    <span class="nav-label">Quiz</span>
+                    <span class="nav-check" id="check-quiz">✓</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>Made for Students 🎓</p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+
+        <!-- ========== BASICS ========== -->
+        <section class="topic-section" id="basics" data-topic="basics">
+            <div class="section-hero">
+                <div class="hero-badge">Module 1</div>
+                <h2 class="section-title">JavaScript Basics</h2>
+                <p class="section-subtitle">Variables, Data Types & Operators — the building blocks of every JS program. Start here if you're a complete beginner!</p>
+            </div>
+
+            <!-- What is JavaScript? Intro -->
+            <div class="beginner-intro">
+                <div class="intro-icon">💡</div>
+                <div class="intro-content">
+                    <h3>What is JavaScript?</h3>
+                    <p>JavaScript is a <strong>programming language</strong> that makes websites interactive. When you click a button and something happens, fill out a form that checks your input, or see content update without reloading the page — that's JavaScript at work!</p>
+                    <p>Think of a website like a house: <strong>HTML</strong> is the structure (walls, doors, windows), <strong>CSS</strong> is the decoration (paint, furniture), and <strong>JavaScript</strong> is the electricity and plumbing — it makes things <em>work</em>.</p>
+                </div>
+            </div>
+
+            <!-- Concept Cards -->
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">📝</span>
+                        <h3>Variables</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 What are variables?</h4>
+                        <p>Variables are like <strong>labeled containers</strong> (or boxes) that store information your program needs to remember. Just like you might label a box "Shoes" to remember what's inside, a variable has a name that describes the data it holds.</p>
+                    </div>
+                    <div class="step-breakdown">
+                        <h4>🔍 Step-by-Step: How Variables Work</h4>
+                        <ol>
+                            <li><strong>Declare</strong> — Tell JavaScript you want to create a variable (using <code>let</code>, <code>const</code>, or <code>var</code>)</li>
+                            <li><strong>Name</strong> — Give it a descriptive name (like <code>userName</code> or <code>totalPrice</code>)</li>
+                            <li><strong>Assign</strong> — Put a value inside it using the <code>=</code> sign</li>
+                            <li><strong>Use</strong> — Reference the name anywhere in your code to get the stored value</li>
+                        </ol>
+                    </div>
+                    <p>JavaScript has three ways to declare variables:</p>
+                    <ul class="concept-list">
+                        <li><code>var</code> — The old way (avoid using this). Function-scoped, can be re-declared. Can lead to confusing bugs.</li>
+                        <li><code>let</code> — The modern way for values that will change. Block-scoped, can be reassigned but not re-declared in the same scope.</li>
+                        <li><code>const</code> — For values that should NEVER change. Block-scoped, cannot be reassigned after creation. Use this by default!</li>
+                    </ul>
+                    <div class="code-snippet">
+                        <pre><code>// Creating variables — the basics
+// Step 1: Use let for values that change
+let score = 0;          // Start at zero
+score = 10;             // ✅ Can change it later!
+
+// Step 2: Use const for values that stay the same
+const name = "Alice";   // This will never change
+// name = "Bob";        // ❌ Error! Can't reassign const
+
+// Step 3: var is the old way (avoid it)
+var oldWay = "legacy";  // Works but don't use it</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World Analogy</span>
+                        <p>Think of <code>const</code> as a sealed box — once you put something in, you can't swap it out. <code>let</code> is a box with a lid you can open and swap contents. <code>var</code> is a box with no lid that anyone can see and mess with — that's why it's risky!</p>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Forgetting <code>let</code>/<code>const</code></strong> — Writing <code>x = 5</code> without a keyword creates a global variable (very bad!)</li>
+                            <li><strong>Using <code>const</code> when you need to reassign</strong> — If the value changes, use <code>let</code> instead</li>
+                            <li><strong>Starting names with numbers</strong> — <code>1name</code> is invalid. Use <code>name1</code> or <code>firstName</code></li>
+                            <li><strong>Using spaces in names</strong> — <code>my name</code> is invalid. Use <code>myName</code> (camelCase)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🔢</span>
+                        <h3>Data Types</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 What are data types?</h4>
+                        <p>Data types tell JavaScript <strong>what kind of information</strong> a variable holds. Just like in real life you wouldn't add a name to a number, JavaScript needs to know what type of data it's dealing with to work with it correctly.</p>
+                    </div>
+                    <p>JavaScript has <strong>8 data types</strong>. Here are the ones you'll use most:</p>
+                    <ul class="concept-list">
+                        <li><code>String</code> — Text wrapped in quotes: <code>"Hello World"</code> or <code>'Hello'</code> or <code>`Hello`</code></li>
+                        <li><code>Number</code> — Any number (no quotes needed): <code>42</code>, <code>3.14</code>, <code>-7</code></li>
+                        <li><code>Boolean</code> — Only two values: <code>true</code> or <code>false</code> (like a light switch — on or off)</li>
+                        <li><code>undefined</code> — A variable that was declared but never given a value</li>
+                        <li><code>null</code> — Intentionally empty — you set it to "nothing" on purpose</li>
+                        <li><code>Object</code> — A collection of related data: <code>{ key: "value" }</code></li>
+                        <li><code>Array</code> — An ordered list of items: <code>[1, 2, 3]</code></li>
+                        <li><code>Symbol</code> — A unique identifier (advanced, rarely used by beginners)</li>
+                    </ul>
+                    <div class="code-snippet">
+                        <pre><code>// Every piece of data has a type
+let greeting = "Hello!";      // String (text)
+let age = 25;                 // Number
+let isHappy = true;           // Boolean (yes/no)
+let middleName = undefined;   // undefined (not set yet)
+let nickname = null;          // null (intentionally empty)
+
+// Use typeof to check any value's type
+console.log(typeof greeting);   // "string"
+console.log(typeof age);        // "number"
+console.log(typeof isHappy);    // "boolean"
+console.log(typeof middleName); // "undefined"
+console.log(typeof nickname);   // "object" (a known JS quirk!)</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World Analogy</span>
+                        <p>Think of a user registration form: the <strong>name field</strong> stores a String, the <strong>age field</strong> stores a Number, the <strong>"Remember me" checkbox</strong> stores a Boolean, and an <strong>unfilled optional field</strong> is undefined.</p>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Wrapping numbers in quotes</strong> — <code>"42"</code> is a String, not a Number! <code>"42" + 1</code> gives <code>"421"</code> (concatenation), not <code>43</code></li>
+                            <li><strong>Confusing null and undefined</strong> — <code>undefined</code> means "not set yet", <code>null</code> means "I set it to nothing on purpose"</li>
+                            <li><strong><code>typeof null</code> returns "object"</strong> — This is a famous JavaScript bug from 1995 that was never fixed!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">➕</span>
+                        <h3>Operators</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 What are operators?</h4>
+                        <p>Operators are <strong>special symbols</strong> that perform actions on values. Just like <code>+</code> and <code>-</code> in math class, JavaScript has operators for math, comparing values, combining conditions, and more.</p>
+                    </div>
+                    <div class="step-breakdown">
+                        <h4>🔍 The Four Types of Operators</h4>
+                        <ol>
+                            <li><strong>Arithmetic</strong> — Do math: <code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code> (remainder) <code>**</code> (power)</li>
+                            <li><strong>Assignment</strong> — Store values: <code>=</code> <code>+=</code> <code>-=</code> <code>*=</code></li>
+                            <li><strong>Comparison</strong> — Compare values: <code>==</code> <code>===</code> <code>!=</code> <code>!==</code> <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code></li>
+                            <li><strong>Logical</strong> — Combine conditions: <code>&&</code> (AND) <code>||</code> (OR) <code>!</code> (NOT)</li>
+                        </ol>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// 🧮 Arithmetic — doing math
+let sum = 10 + 5;       // 15 — addition
+let diff = 10 - 5;      // 5  — subtraction
+let product = 10 * 5;   // 50 — multiplication
+let quotient = 10 / 3;  // 3.333... — division
+let remainder = 10 % 3; // 1  — what's left over
+let power = 2 ** 3;     // 8  — 2 to the power of 3
+
+// 🔄 Assignment shortcuts
+let count = 0;
+count += 5;  // Same as: count = count + 5 → 5
+count -= 2;  // Same as: count = count - 2 → 3
+count *= 4;  // Same as: count = count * 4 → 12
+
+// ⚖️ Comparison — returns true or false
+console.log(5 === 5);    // true  (same value, same type)
+console.log(5 === "5");  // false (different types!)
+console.log(5 == "5");   // true  (== ignores type — DON'T use this!)
+console.log(10 > 5);     // true
+console.log(10 <= 10);   // true
+
+// 🧠 Logical — combining conditions
+let age = 20;
+let hasID = true;
+console.log(age >= 18 && hasID);  // true (both true)
+console.log(age >= 21 || hasID);  // true (at least one true)
+console.log(!hasID);              // false (flips true → false)</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World Analogy</span>
+                        <p>Always use <code>===</code> (strict equality) instead of <code>==</code>. Why? <code>==</code> tries to convert types before comparing, leading to bizarre results: <code>0 == ""</code> is <code>true</code>, <code>null == undefined</code> is <code>true</code>. Strict equality prevents these surprises!</p>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Using <code>=</code> instead of <code>===</code> in conditions</strong> — <code>=</code> assigns a value, <code>===</code> compares. <code>if (x = 5)</code> doesn't check if x is 5, it SETS x to 5!</li>
+                            <li><strong>String + Number concatenation</strong> — <code>"5" + 3</code> gives <code>"53"</code> (a string), not <code>8</code>. Use <code>Number("5") + 3</code> to get <code>8</code></li>
+                            <li><strong>Division by zero</strong> — In JavaScript, <code>5 / 0</code> gives <code>Infinity</code> (not an error!)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">📝</span>
+                        <h3>Template Literals</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 What are template literals?</h4>
+                        <p>Template literals are a modern way to create strings using <strong>backticks</strong> (<code>`</code>) instead of quotes. They let you embed variables and expressions directly inside a string using <code>${...}</code> — no more clunky string concatenation!</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// ❌ Old way — messy string concatenation
+let name = "Alice";
+let age = 25;
+let message = "Hello, " + name + "! You are " + age + " years old.";
+
+// ✅ New way — template literals (much cleaner!)
+let betterMessage = `Hello, ${name}! You are ${age} years old.`;
+
+// You can put ANY expression inside ${}
+let price = 19.99;
+let tax = 0.08;
+console.log(`Total: $${(price * (1 + tax)).toFixed(2)}`);
+// Output: Total: $21.59
+
+// Multi-line strings (no more \n!)
+let poem = `Roses are red,
+Violets are blue,
+JavaScript is awesome,
+And so are you!`;
+console.log(poem);</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World</span>
+                        <p>Template literals are used everywhere in modern JavaScript — building HTML dynamically, creating API URLs, formatting user messages, and more. They're one of the most-used ES6 features.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Animation: Variable Boxes -->
+            <div class="interactive-demo">
+                <div class="demo-header">
+                    <span class="demo-badge">🎮 Interactive Demo</span>
+                    <h3>Variables as Containers</h3>
+                    <p>Click the boxes to change values and see how variables work! Notice that <code>const</code> boxes are locked — they can't be changed.</p>
+                </div>
+                <div class="demo-area var-demo">
+                    <div class="var-box" id="varBox1" onclick="animVarClick(1)">
+                        <div class="var-label">let <span class="var-name">name</span></div>
+                        <div class="var-value" id="varVal1">"Alice"</div>
+                        <div class="var-type">String</div>
+                        <div class="var-badge var-let">let — can change ✏️</div>
+                    </div>
+                    <div class="var-box" id="varBox2" onclick="animVarClick(2)">
+                        <div class="var-label">const <span class="var-name">age</span></div>
+                        <div class="var-value" id="varVal2">25</div>
+                        <div class="var-type">Number</div>
+                        <div class="var-badge var-const">const — locked 🔒</div>
+                    </div>
+                    <div class="var-box" id="varBox3" onclick="animVarClick(3)">
+                        <div class="var-label">let <span class="var-name">active</span></div>
+                        <div class="var-value" id="varVal3">true</div>
+                        <div class="var-type">Boolean</div>
+                        <div class="var-badge var-let">let — can change ✏️</div>
+                    </div>
+                    <div class="var-box" id="varBox4" onclick="animVarClick(4)">
+                        <div class="var-label">let <span class="var-name">score</span></div>
+                        <div class="var-value" id="varVal4">null</div>
+                        <div class="var-type">null</div>
+                        <div class="var-badge var-let">let — can change ✏️</div>
+                    </div>
+                </div>
+                <div class="demo-log" id="varDemoLog">👆 Click any variable box to change its value!</div>
+            </div>
+
+            <!-- Code Editor -->
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>🚀 Try It Yourself</h3>
+                    <p>Experiment with variables, types and operators. Modify the code and hit "Run Code" to see results!</p>
+                </div>
+                <div class="code-editor-container">
+                    <div class="editor-toolbar">
+                        <span class="editor-lang">JavaScript</span>
+                        <div class="editor-actions">
+                            <button class="btn-reset" onclick="resetEditor('basics')">↺ Reset</button>
+                            <button class="btn-run" onclick="runCode('basics')">▶ Run Code</button>
+                        </div>
+                    </div>
+                    <textarea class="code-editor" id="editor-basics" spellcheck="false">// 🎯 EXAMPLE 1: Variables — Try changing the values!
+let userName = "Alice";
+const birthYear = 1999;
+let isStudent = true;
+
+// Calculate age automatically
+const currentYear = 2025;
+let age = currentYear - birthYear;
+
+console.log("👤 Name:", userName);
+console.log("🎂 Age:", age);
+console.log("📚 Is Student:", isStudent);
+
+// 🔢 EXAMPLE 2: Check types with typeof
+console.log("\n--- Data Types ---");
+console.log("Type of userName:", typeof userName);   // string
+console.log("Type of age:", typeof age);             // number
+console.log("Type of isStudent:", typeof isStudent); // boolean
+console.log("Type of null:", typeof null);           // object (JS bug!)
+
+// ➕ EXAMPLE 3: Operators in action
+console.log("\n--- Operators ---");
+let total = 100;
+let discount = 20;
+let finalPrice = total - (total * discount / 100);
+console.log(`Original: $${total}`);
+console.log(`Discount: ${discount}%`);
+console.log(`Final Price: $${finalPrice}`);
+
+// ⚖️ EXAMPLE 4: Strict vs loose equality
+console.log("\n--- Equality Check ---");
+console.log('5 === "5":', 5 === "5");  // false (strict ✅)
+console.log('5 == "5":', 5 == "5");    // true (loose ❌ avoid!)
+
+// 🧪 Try changing values above and see what happens!</textarea>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <span>📋 Output</span>
+                            <button class="btn-clear-output" onclick="clearOutput('basics')">Clear</button>
+                        </div>
+                        <pre class="output-display" id="output-basics"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ARRAYS & OBJECTS ========== -->
+        <section class="topic-section" id="arrays" data-topic="arrays" style="display:none;">
+            <div class="section-hero">
+                <div class="hero-badge">Module 2</div>
+                <h2 class="section-title">Arrays & Objects</h2>
+                <p class="section-subtitle">Learn to organize and manage collections of data — the backbone of every real application.</p>
+            </div>
+
+            <div class="beginner-intro">
+                <div class="intro-icon">💡</div>
+                <div class="intro-content">
+                    <h3>Why do we need Arrays and Objects?</h3>
+                    <p>Imagine you're building a to-do app. You could create <code>task1</code>, <code>task2</code>, <code>task3</code>... but what if you have 100 tasks? <strong>Arrays</strong> let you store a list of items in a single variable. <strong>Objects</strong> let you group related data together (like a contact card with name, email, and phone).</p>
+                </div>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">📚</span>
+                        <h3>Arrays</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 What is an Array?</h4>
+                        <p>An array is an <strong>ordered list of values</strong>. Think of it like a numbered shelf — each slot has a position (called an <strong>index</strong>) starting from <code>0</code>, and you can put any type of value in each slot.</p>
+                    </div>
+                    <div class="step-breakdown">
+                        <h4>🔍 Key Array Concepts</h4>
+                        <ol>
+                            <li><strong>Index starts at 0</strong> — The first item is at position 0, second at 1, etc.</li>
+                            <li><strong>.length</strong> — Tells you how many items are in the array</li>
+                            <li><strong>.push()</strong> — Adds an item to the end</li>
+                            <li><strong>.pop()</strong> — Removes the last item</li>
+                            <li><strong>.includes()</strong> — Checks if an item exists</li>
+                        </ol>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Creating an array
+const fruits = ["Apple", "Banana", "Cherry"];
+
+// Accessing items by index (starts at 0!)
+console.log(fruits[0]);  // "Apple" (first item)
+console.log(fruits[2]);  // "Cherry" (third item)
+
+// Adding and removing items
+fruits.push("Date");       // Add to end → ["Apple","Banana","Cherry","Date"]
+fruits.pop();              // Remove from end → ["Apple","Banana","Cherry"]
+fruits.unshift("Avocado"); // Add to beginning
+fruits.shift();            // Remove from beginning
+
+// Useful properties
+console.log(fruits.length);          // 3
+console.log(fruits.includes("Banana")); // true
+console.log(fruits.indexOf("Cherry"));  // 2</code></pre>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Off-by-one errors</strong> — The last item is at index <code>array.length - 1</code>, NOT <code>array.length</code></li>
+                            <li><strong>Accessing non-existent index</strong> — <code>fruits[99]</code> returns <code>undefined</code>, NOT an error</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🔧</span>
+                        <h3>Array Methods</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Powerful tools for working with data</h4>
+                        <p>Array methods let you <strong>transform, filter, and search</strong> through lists of data without writing complex loops. These are used constantly in real-world JavaScript.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// .map() — Transform every item
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+// .filter() — Keep only items that pass a test
+const evens = numbers.filter(num => num % 2 === 0);
+console.log(evens); // [2, 4, 6, 8, 10]
+
+// .find() — Get the FIRST item that passes a test
+const firstBig = numbers.find(num => num > 5);
+console.log(firstBig); // 6
+
+// .reduce() — Combine all items into one value
+const sum = numbers.reduce((total, num) => total + num, 0);
+console.log(sum); // 55
+
+// .forEach() — Do something with each item
+numbers.forEach(num => console.log(num * 10));</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World</span>
+                        <p>Online stores use <code>.filter()</code> to show only products in your price range, <code>.map()</code> to calculate discounted prices, and <code>.reduce()</code> to calculate cart totals.</p>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🗂️</span>
+                        <h3>Objects</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 What is an Object?</h4>
+                        <p>An object stores data as <strong>key-value pairs</strong>. Think of it like a dictionary — you look up a word (the key) to find its definition (the value). Objects are perfect for grouping related information together.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Creating an object
+const student = {
+  name: "Alice",           // key: value
+  age: 20,
+  major: "Computer Science",
+  isEnrolled: true,
+  grades: [95, 88, 92],   // values can be arrays!
+  
+  // Methods — functions inside objects
+  introduce() {
+    return `Hi, I'm ${this.name}, studying ${this.major}!`;
+  }
+};
+
+// Accessing values (two ways)
+console.log(student.name);       // "Alice" (dot notation)
+console.log(student["major"]);   // "Computer Science" (bracket notation)
+
+// Modifying values
+student.age = 21;                // Change existing
+student.gpa = 3.8;              // Add new property
+
+// Calling a method
+console.log(student.introduce()); // "Hi, I'm Alice, studying Computer Science!"
+
+// Check if a key exists
+console.log("name" in student);  // true
+console.log("salary" in student); // false</code></pre>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Using dot notation with variables</strong> — <code>student.key</code> looks for a property literally named "key". Use <code>student[key]</code> when <code>key</code> is a variable.</li>
+                            <li><strong>Forgetting <code>this</code> in methods</strong> — Inside an object's method, use <code>this.name</code> not just <code>name</code></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🔄</span>
+                        <h3>Destructuring</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 A shortcut for extracting values</h4>
+                        <p>Destructuring lets you <strong>unpack values from arrays or properties from objects</strong> into individual variables in one clean line — instead of multiple verbose lines.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// 📦 Object Destructuring
+const user = { name: "Alice", age: 25, city: "NYC" };
+
+// ❌ Old way — repetitive
+const name1 = user.name;
+const age1 = user.age;
+
+// ✅ New way — destructuring!
+const { name, age, city } = user;
+console.log(name, age, city); // Alice 25 NYC
+
+// 📚 Array Destructuring
+const colors = ["red", "green", "blue"];
+const [first, second, third] = colors;
+console.log(first);  // "red"
+console.log(third);  // "blue"
+
+// 🎯 Swap variables without a temp!
+let a = 1, b = 2;
+[a, b] = [b, a];
+console.log(a, b); // 2 1
+
+// 🔄 Rest operator — get "the rest" as an array
+const [head, ...tail] = [10, 20, 30, 40];
+console.log(head); // 10
+console.log(tail); // [20, 30, 40]</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World</span>
+                        <p>Destructuring is used constantly in React: <code>const [count, setCount] = useState(0)</code> and in API responses: <code>const { data, error } = await fetch(...)</code></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>🚀 Try It Yourself</h3>
+                    <p>Practice working with arrays and objects:</p>
+                </div>
+                <div class="code-editor-container">
+                    <div class="editor-toolbar">
+                        <span class="editor-lang">JavaScript</span>
+                        <div class="editor-actions">
+                            <button class="btn-reset" onclick="resetEditor('arrays')">↺ Reset</button>
+                            <button class="btn-run" onclick="runCode('arrays')">▶ Run Code</button>
+                        </div>
+                    </div>
+                    <textarea class="code-editor" id="editor-arrays" spellcheck="false">// 📚 Arrays — A shopping list app!
+const shoppingList = ["Milk", "Eggs", "Bread", "Butter"];
+console.log("🛒 Shopping List:", shoppingList);
+console.log("Items:", shoppingList.length);
+
+// Add items
+shoppingList.push("Cheese", "Apples");
+console.log("After adding:", shoppingList);
+
+// Remove last item  
+const removed = shoppingList.pop();
+console.log(`Removed: ${removed}`);
+
+// Transform with map
+const numbered = shoppingList.map((item, i) => `${i + 1}. ${item}`);
+console.log("\n📋 Numbered List:");
+numbered.forEach(item => console.log("  " + item));
+
+// 🗂️ Objects — A student profile
+console.log("\n--- Student Profile ---");
+const student = {
+  name: "Alice",
+  age: 20,
+  grades: [95, 88, 92, 78, 85],
+  
+  getAverage() {
+    const sum = this.grades.reduce((a, b) => a + b, 0);
+    return (sum / this.grades.length).toFixed(1);
+  },
+  
+  getHighest() {
+    return Math.max(...this.grades);
+  }
+};
+
+console.log(`👤 ${student.name}, Age: ${student.age}`);
+console.log(`📊 Average: ${student.getAverage()}`);
+console.log(`🏆 Highest: ${student.getHighest()}`);
+
+// 🔄 Destructuring
+const { name, grades } = student;
+const [first, ...rest] = grades;
+console.log(`\nFirst grade: ${first}, Others: [${rest}]`);</textarea>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <span>📋 Output</span>
+                            <button class="btn-clear-output" onclick="clearOutput('arrays')">Clear</button>
+                        </div>
+                        <pre class="output-display" id="output-arrays"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CONTROL FLOW ========== -->
+        <section class="topic-section" id="controlflow" data-topic="controlflow" style="display:none;">
+            <div class="section-hero">
+                <div class="hero-badge">Module 3</div>
+                <h2 class="section-title">Loops & Conditionals</h2>
+                <p class="section-subtitle">Control the flow of your programs — make decisions with if/else and repeat actions with loops.</p>
+            </div>
+
+            <div class="beginner-intro">
+                <div class="intro-icon">💡</div>
+                <div class="intro-content">
+                    <h3>Why do we need control flow?</h3>
+                    <p>Without conditionals, your code would do the same thing every time — no decisions! Without loops, you'd have to write the same code 100 times to process 100 items. <strong>Conditionals</strong> let your code make decisions, and <strong>loops</strong> let it repeat tasks efficiently.</p>
+                </div>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🚦</span>
+                        <h3>if / else if / else</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Making decisions in code</h4>
+                        <p><code>if</code> statements let your code choose different paths based on a condition. It's like a traffic light — if green, go; if red, stop; otherwise, slow down.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Basic if/else
+let temperature = 30;
+
+if (temperature > 35) {
+  console.log("🔥 It's extremely hot! Stay hydrated.");
+} else if (temperature > 25) {
+  console.log("☀️ It's warm and sunny. Perfect day!");
+} else if (temperature > 15) {
+  console.log("🌤️ It's mild. Maybe grab a jacket.");
+} else {
+  console.log("❄️ It's cold! Bundle up.");
+}
+
+// Ternary operator — a short if/else
+let age = 20;
+let status = age >= 18 ? "Adult" : "Minor";
+console.log(status); // "Adult"
+
+// Nullish coalescing — default values
+let username = null;
+let displayName = username ?? "Guest";
+console.log(displayName); // "Guest"</code></pre>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Missing curly braces</strong> — Always use <code>{}</code> even for single-line blocks. Prevents confusing bugs!</li>
+                            <li><strong>Using <code>=</code> instead of <code>===</code></strong> — <code>if (x = 5)</code> assigns 5 to x (always true!). Use <code>if (x === 5)</code></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🔀</span>
+                        <h3>switch Statement</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 When you have many options</h4>
+                        <p>Use <code>switch</code> when you need to compare one value against many possible matches. It's cleaner than writing many <code>if/else if</code> blocks.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>let day = "Monday";
+
+switch (day) {
+  case "Monday":
+  case "Tuesday":
+  case "Wednesday":
+  case "Thursday":
+  case "Friday":
+    console.log("📅 It's a weekday. Time to work!");
+    break;  // ⚠️ ALWAYS add break!
+  case "Saturday":
+  case "Sunday":
+    console.log("🎉 It's the weekend!");
+    break;
+  default:
+    console.log("❓ That's not a valid day.");
+}
+// Output: "📅 It's a weekday. Time to work!"</code></pre>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Forgetting <code>break</code></strong> — Without it, code "falls through" and executes ALL cases below the match!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🔁</span>
+                        <h3>for Loop</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Repeating actions a specific number of times</h4>
+                        <p>A <code>for</code> loop repeats a block of code a set number of times. It has three parts: <strong>start</strong> (where to begin), <strong>condition</strong> (when to stop), and <strong>step</strong> (how to move forward).</p>
+                    </div>
+                    <div class="step-breakdown">
+                        <h4>🔍 Anatomy of a for loop</h4>
+                        <ol>
+                            <li><code>let i = 0</code> — <strong>Initialization</strong>: Start counting from 0</li>
+                            <li><code>i < 5</code> — <strong>Condition</strong>: Keep going while i is less than 5</li>
+                            <li><code>i++</code> — <strong>Update</strong>: Add 1 to i after each loop</li>
+                        </ol>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Basic for loop — count from 0 to 4
+for (let i = 0; i < 5; i++) {
+  console.log(`Iteration ${i}`);
+}
+
+// Loop through an array
+const colors = ["Red", "Green", "Blue"];
+for (let i = 0; i < colors.length; i++) {
+  console.log(`Color ${i + 1}: ${colors[i]}`);
+}
+
+// for...of — cleaner way to loop arrays
+for (const color of colors) {
+  console.log(`🎨 ${color}`);
+}
+
+// for...in — loop through object keys
+const person = { name: "Alice", age: 25, city: "NYC" };
+for (const key in person) {
+  console.log(`${key}: ${person[key]}`);
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🔄</span>
+                        <h3>while & do...while</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Repeating when you don't know how many times</h4>
+                        <p>Use <code>while</code> when you don't know in advance how many times to loop — you just keep going until a condition becomes false.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// while — check condition FIRST
+let count = 0;
+while (count < 3) {
+  console.log(`Count: ${count}`);
+  count++;    // ⚠️ Don't forget this!
+}
+// Output: Count: 0, Count: 1, Count: 2
+
+// do...while — always runs at least ONCE
+let num = 10;
+do {
+  console.log(`Num is: ${num}`);
+  num++;
+} while (num < 5);
+// Output: "Num is: 10" (runs once even though 10 > 5!)
+
+// Real example: keep halving until less than 1
+let value = 100;
+let steps = 0;
+while (value >= 1) {
+  value /= 2;
+  steps++;
+}
+console.log(`Took ${steps} steps to go below 1`); // 7</code></pre>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Infinite loops</strong> — Forgetting to update the condition variable creates a loop that never stops (crashes browser!)</li>
+                            <li><strong>Off-by-one errors</strong> — Using <code>&lt;=</code> vs <code>&lt;</code> can cause one extra iteration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>🚀 Try It Yourself</h3>
+                    <p>Practice conditionals and loops:</p>
+                </div>
+                <div class="code-editor-container">
+                    <div class="editor-toolbar">
+                        <span class="editor-lang">JavaScript</span>
+                        <div class="editor-actions">
+                            <button class="btn-reset" onclick="resetEditor('controlflow')">↺ Reset</button>
+                            <button class="btn-run" onclick="runCode('controlflow')">▶ Run Code</button>
+                        </div>
+                    </div>
+                    <textarea class="code-editor" id="editor-controlflow" spellcheck="false">// 🚦 Conditionals — Grade Calculator
+function getGrade(score) {
+  if (score >= 90) return "A ⭐";
+  else if (score >= 80) return "B 👍";
+  else if (score >= 70) return "C 😐";
+  else if (score >= 60) return "D 😟";
+  else return "F ❌";
+}
+
+const scores = [95, 82, 67, 78, 91, 55];
+console.log("📊 Grade Report:");
+scores.forEach((score, i) => {
+  console.log(`  Student ${i + 1}: ${score} → ${getGrade(score)}`);
+});
+
+// 🔁 Loops — Multiplication Table
+console.log("\n📐 Multiplication Table for 7:");
+for (let i = 1; i <= 10; i++) {
+  console.log(`  7 × ${i} = ${7 * i}`);
+}
+
+// 🔄 While loop — Countdown
+console.log("\n🚀 Countdown:");
+let countdown = 5;
+while (countdown > 0) {
+  console.log(`  ${countdown}...`);
+  countdown--;
+}
+console.log("  🎉 Liftoff!");
+
+// 🎯 Combining loops & conditions — FizzBuzz
+console.log("\n🎮 FizzBuzz (1-20):");
+for (let i = 1; i <= 20; i++) {
+  if (i % 15 === 0) console.log(`  ${i}: FizzBuzz`);
+  else if (i % 3 === 0) console.log(`  ${i}: Fizz`);
+  else if (i % 5 === 0) console.log(`  ${i}: Buzz`);
+  else console.log(`  ${i}`);
+}</textarea>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <span>📋 Output</span>
+                            <button class="btn-clear-output" onclick="clearOutput('controlflow')">Clear</button>
+                        </div>
+                        <pre class="output-display" id="output-controlflow"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FUNCTIONS ========== -->
+        <section class="topic-section" id="functions" data-topic="functions" style="display:none;">
+            <div class="section-hero">
+                <div class="hero-badge">Module 4</div>
+                <h2 class="section-title">Functions</h2>
+                <p class="section-subtitle">Reusable blocks of code — from declarations to arrow functions, callbacks, and closures.</p>
+            </div>
+
+            <div class="beginner-intro">
+                <div class="intro-icon">💡</div>
+                <div class="intro-content">
+                    <h3>Why do we need functions?</h3>
+                    <p>Imagine you need to calculate a discount price in 20 different places in your code. Without functions, you'd copy the same calculation 20 times! Functions let you write the code <strong>once</strong> and <strong>reuse it</strong> anywhere by calling its name. They're the building blocks of organized, maintainable code.</p>
+                </div>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">📌</span>
+                        <h3>Function Declaration</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 The classic way to define a function</h4>
+                        <p>A function declaration creates a named, reusable block of code. It takes <strong>inputs</strong> (called parameters), does something with them, and optionally gives back an <strong>output</strong> (called a return value).</p>
+                    </div>
+                    <div class="step-breakdown">
+                        <h4>🔍 Anatomy of a Function</h4>
+                        <ol>
+                            <li><code>function</code> — The keyword that says "I'm creating a function"</li>
+                            <li><code>greet</code> — The function's name (use descriptive verbs!)</li>
+                            <li><code>(name)</code> — Parameters: the inputs the function accepts</li>
+                            <li><code>{ ... }</code> — The function body: the code that runs</li>
+                            <li><code>return</code> — Sends a value back to wherever the function was called</li>
+                        </ol>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Defining a function
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+// Calling (using) the function
+console.log(greet("Alice"));  // "Hello, Alice!"
+console.log(greet("Bob"));    // "Hello, Bob!"
+
+// Function with multiple parameters
+function add(a, b) {
+  return a + b;
+}
+console.log(add(5, 3)); // 8
+
+// Default parameters — fallback values
+function greetUser(name = "Guest") {
+  return `Welcome, ${name}!`;
+}
+console.log(greetUser());        // "Welcome, Guest!"
+console.log(greetUser("Alice")); // "Welcome, Alice!"</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World Analogy</span>
+                        <p>A function is like a <strong>recipe</strong>. The recipe name is the function name, the ingredients are the parameters, and the finished dish is the return value. You write the recipe once and can follow it whenever you want!</p>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Forgetting <code>return</code></strong> — Without it, the function gives back <code>undefined</code></li>
+                            <li><strong>Calling without parentheses</strong> — <code>greet</code> gives you the function itself, <code>greet()</code> actually runs it</li>
+                            <li><strong>Mixing up console.log and return</strong> — <code>console.log</code> prints to console, <code>return</code> sends a value back</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">➡️</span>
+                        <h3>Arrow Functions</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 A shorter, modern way to write functions</h4>
+                        <p>Arrow functions (introduced in ES6) are a <strong>concise syntax</strong> for writing functions. They use <code>=></code> instead of the <code>function</code> keyword. They're perfect for short, simple functions.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Regular function
+function double(x) {
+  return x * 2;
+}
+
+// Arrow function — same thing, shorter!
+const doubleArrow = (x) => x * 2;
+
+// If there's ONE parameter, no parentheses needed
+const triple = x => x * 3;
+
+// If there are ZERO parameters, use empty parens
+const getRandom = () => Math.random();
+
+// If there's MORE than one line, use {} and return
+const calculateTax = (price, rate) => {
+  const tax = price * rate;
+  const total = price + tax;
+  return total;
+};
+
+console.log(double(5));          // 10
+console.log(triple(5));          // 15
+console.log(calculateTax(100, 0.08)); // 108</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World</span>
+                        <p>Arrow functions are used heavily with array methods: <code>users.filter(u => u.active)</code>, <code>prices.map(p => p * 0.9)</code>, event handlers, and React components.</p>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🔄</span>
+                        <h3>Callbacks</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Functions passed to other functions</h4>
+                        <p>A callback is a function you <strong>pass as an argument</strong> to another function. The receiving function will "call back" your function at the right time — like leaving your phone number for a restaurant to call you when your table is ready.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Simple callback example
+function processData(data, callback) {
+  // Do some processing...
+  const result = data.toUpperCase();
+  // Then "call back" with the result
+  callback(result);
+}
+
+processData("hello", function(result) {
+  console.log(result);  // "HELLO"
+});
+
+// Using arrow function as callback (cleaner!)
+processData("world", result => console.log(result)); // "WORLD"
+
+// setTimeout — a built-in function that uses callbacks
+console.log("Start");
+setTimeout(() => {
+  console.log("This runs after 2 seconds!");
+}, 2000);
+console.log("End");
+// Output: "Start" → "End" → (2 sec) → "This runs after 2 seconds!"
+
+// Array methods use callbacks too!
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(num => num * 2);  // map's callback
+console.log(doubled); // [2, 4, 6, 8, 10]</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World Analogy</span>
+                        <p>Like ordering food with delivery: you place the order (call the function) and give them your address (the callback). They'll deliver to your address (call your callback) when the food is ready — you don't have to wait at the restaurant!</p>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🔒</span>
+                        <h3>Scope & Closures</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Where can you access your variables?</h4>
+                        <p><strong>Scope</strong> determines where a variable can be accessed. <strong>Closures</strong> allow a function to remember variables from the place where it was created, even after that place has finished executing.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Scope — who can see what?
+let globalVar = "I'm everywhere!"; // Global scope
+
+function myFunction() {
+  let localVar = "Only inside this function"; // Local scope
+  console.log(globalVar);  // ✅ Can see global
+  console.log(localVar);   // ✅ Can see local
+}
+// console.log(localVar);  // ❌ Error! Can't see it here
+
+// Block scope — let/const only exist inside { }
+if (true) {
+  let blockVar = "Only inside this block";
+  console.log(blockVar);  // ✅ Works here
+}
+// console.log(blockVar);  // ❌ Error!
+
+// 🔒 Closures — functions that "remember"
+function createCounter() {
+  let count = 0;  // This variable is "enclosed"
+  
+  return function() {
+    count++;       // The inner function remembers count!
+    return count;
+  };
+}
+
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3
+// count is private — no one can access it directly!</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World Analogy</span>
+                        <p>Closures are like a <strong>backpack</strong> a function carries. Even after leaving the room where it was created, the function still has its backpack with all the variables it needs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Animation: Function Pipeline -->
+            <div class="interactive-demo">
+                <div class="demo-header">
+                    <span class="demo-badge">🎮 Interactive Demo</span>
+                    <h3>Function Call Flow</h3>
+                    <p>Watch how data flows through functions! Click "Run Pipeline" to start the animation.</p>
+                </div>
+                <div class="demo-area func-demo">
+                    <div class="func-pipeline">
+                        <div class="func-input-box" id="funcInput">
+                            <div class="func-box-label">Input</div>
+                            <div class="func-box-value" id="funcInputVal">5</div>
+                        </div>
+                        <div class="func-arrow" id="funcArrow1">→</div>
+                        <div class="func-machine" id="funcMachine1">
+                            <div class="func-machine-label">double(x)</div>
+                            <div class="func-machine-body">return x * 2</div>
+                        </div>
+                        <div class="func-arrow" id="funcArrow2">→</div>
+                        <div class="func-machine" id="funcMachine2">
+                            <div class="func-machine-label">addTen(x)</div>
+                            <div class="func-machine-body">return x + 10</div>
+                        </div>
+                        <div class="func-arrow" id="funcArrow3">→</div>
+                        <div class="func-output-box" id="funcOutput">
+                            <div class="func-box-label">Output</div>
+                            <div class="func-box-value" id="funcOutputVal">?</div>
+                        </div>
+                    </div>
+                    <div class="func-controls">
+                        <button class="demo-btn" onclick="runFuncPipeline()">▶ Run Pipeline</button>
+                        <button class="demo-btn demo-btn-secondary" onclick="resetFuncPipeline()">↺ Reset</button>
+                        <div class="func-input-control">
+                            <label>Change input:</label>
+                            <input type="number" id="funcInputNum" value="5" min="0" max="100" onchange="updateFuncInput()">
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-log" id="funcDemoLog">👆 Click "Run Pipeline" to watch data flow through functions!</div>
+            </div>
+
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>🚀 Try It Yourself</h3>
+                    <p>Write and test different function types:</p>
+                </div>
+                <div class="code-editor-container">
+                    <div class="editor-toolbar">
+                        <span class="editor-lang">JavaScript</span>
+                        <div class="editor-actions">
+                            <button class="btn-reset" onclick="resetEditor('functions')">↺ Reset</button>
+                            <button class="btn-run" onclick="runCode('functions')">▶ Run Code</button>
+                        </div>
+                    </div>
+                    <textarea class="code-editor" id="editor-functions" spellcheck="false">// 📌 Function Declaration — reusable code blocks
+function calculateBMI(weight, height) {
+  // weight in kg, height in meters
+  const bmi = weight / (height * height);
+  return bmi.toFixed(1);
+}
+
+function getBMICategory(bmi) {
+  if (bmi < 18.5) return "Underweight";
+  if (bmi < 25) return "Normal ✅";
+  if (bmi < 30) return "Overweight";
+  return "Obese";
+}
+
+// Using our functions
+const myBMI = calculateBMI(70, 1.75);
+console.log(`BMI: ${myBMI}`);
+console.log(`Category: ${getBMICategory(myBMI)}`);
+
+// ➡️ Arrow Functions — shorter syntax
+const square = x => x * x;
+const max = (a, b) => a > b ? a : b;
+console.log(`\n5 squared: ${square(5)}`);
+console.log(`Max of 10, 7: ${max(10, 7)}`);
+
+// 🔄 Callbacks — functions as arguments
+function processArray(arr, callback) {
+  return arr.map(callback);
+}
+
+const numbers = [1, 2, 3, 4, 5];
+const doubled = processArray(numbers, n => n * 2);
+const cubed = processArray(numbers, n => n ** 3);
+console.log(`\nDoubled: [${doubled}]`);
+console.log(`Cubed: [${cubed}]`);
+
+// 🔒 Closure — a counter that remembers its state
+function createCounter(startAt = 0) {
+  let count = startAt;
+  return {
+    increment: () => ++count,
+    decrement: () => --count,
+    getCount: () => count,
+  };
+}
+
+const myCounter = createCounter(10);
+console.log(`\nCounter: ${myCounter.getCount()}`);
+myCounter.increment();
+myCounter.increment();
+myCounter.increment();
+console.log(`After 3 increments: ${myCounter.getCount()}`);</textarea>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <span>📋 Output</span>
+                            <button class="btn-clear-output" onclick="clearOutput('functions')">Clear</button>
+                        </div>
+                        <pre class="output-display" id="output-functions"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== OOP ========== -->
+        <section class="topic-section" id="oop" data-topic="oop" style="display:none;">
+            <div class="section-hero">
+                <div class="hero-badge">Module 5</div>
+                <h2 class="section-title">Object-Oriented Programming</h2>
+                <p class="section-subtitle">Objects, Classes & Inheritance — model the real world with structured, reusable code.</p>
+            </div>
+
+            <div class="beginner-intro">
+                <div class="intro-icon">💡</div>
+                <div class="intro-content">
+                    <h3>What is Object-Oriented Programming (OOP)?</h3>
+                    <p>OOP is a way of organizing code around <strong>"objects"</strong> — things that have properties (data) and methods (actions). Instead of writing loose functions everywhere, you group related data and behavior together. Think of it like building with LEGO — each piece (object) has its own shape and snaps together with others to build something bigger.</p>
+                </div>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🏭</span>
+                        <h3>Classes — Blueprints for Objects</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 What is a Class?</h4>
+                        <p>A class is a <strong>blueprint</strong> (a template) for creating objects. It defines what properties and methods every object of that type should have. You write the class once, then create as many objects from it as you need.</p>
+                    </div>
+                    <div class="step-breakdown">
+                        <h4>🔍 Parts of a Class</h4>
+                        <ol>
+                            <li><code>class</code> — Keyword to declare a class (capitalize the name: <code>Animal</code>, not <code>animal</code>)</li>
+                            <li><code>constructor()</code> — Special method that runs when you create a new object. Use it to set up initial properties.</li>
+                            <li><code>this</code> — Refers to the current object being created. <code>this.name</code> means "this object's name".</li>
+                            <li><code>methods</code> — Functions defined inside the class that all objects can use.</li>
+                            <li><code>new</code> — The keyword that creates an object from the class blueprint.</li>
+                        </ol>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Define the blueprint
+class Animal {
+  constructor(name, sound) {
+    // 'this' = the object being created
+    this.name = name;
+    this.sound = sound;
+  }
+
+  // A method — something the animal can DO
+  speak() {
+    return `${this.name} says ${this.sound}!`;
+  }
+}
+
+// Create objects from the blueprint
+const dog = new Animal("Rex", "Woof");
+const cat = new Animal("Whiskers", "Meow");
+
+console.log(dog.speak());  // "Rex says Woof!"
+console.log(cat.speak());  // "Whiskers says Meow!"
+console.log(dog.name);     // "Rex"</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World Analogy</span>
+                        <p>A class is like a <strong>cookie cutter</strong>. The cookie cutter (class) defines the shape. Each cookie you stamp out (object) has the same shape but can be decorated differently (different property values).</p>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🧬</span>
+                        <h3>Inheritance — extends & super</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Building on existing blueprints</h4>
+                        <p>Inheritance lets you create a <strong>child class</strong> that inherits all properties and methods from a <strong>parent class</strong>, then adds its own unique features. This avoids code duplication.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Parent class
+class Vehicle {
+  constructor(brand, speed) {
+    this.brand = brand;
+    this.speed = speed;
+  }
+  describe() {
+    return `${this.brand} goes ${this.speed} km/h`;
+  }
+}
+
+// Child class — inherits from Vehicle
+class Car extends Vehicle {
+  constructor(brand, speed, doors) {
+    super(brand, speed);  // Call parent's constructor
+    this.doors = doors;   // Add new property
+  }
+  // Override parent's method
+  describe() {
+    return `${super.describe()} with ${this.doors} doors`;
+  }
+}
+
+class Motorcycle extends Vehicle {
+  wheelie() {
+    return `${this.brand} does a wheelie! 🏍️`;
+  }
+}
+
+const tesla = new Car("Tesla", 250, 4);
+console.log(tesla.describe()); // "Tesla goes 250 km/h with 4 doors"
+
+const harley = new Motorcycle("Harley", 180);
+console.log(harley.describe()); // "Harley goes 180 km/h"
+console.log(harley.wheelie());  // "Harley does a wheelie! 🏍️"</code></pre>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Forgetting <code>super()</code></strong> — Must call <code>super()</code> first in a child class constructor before using <code>this</code></li>
+                            <li><strong>Forgetting <code>new</code></strong> — <code>Car("Tesla")</code> without <code>new</code> throws an error</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🔐</span>
+                        <h3>Getters, Setters & Private Fields</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Controlling access to data</h4>
+                        <p><strong>Getters</strong> let you read a computed value like a property. <strong>Setters</strong> let you validate data before storing it. <strong>Private fields</strong> (<code>#</code>) prevent outside access entirely — for data that should only be modified through methods.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>class Temperature {
+  #celsius;  // Private field — can't access from outside
+
+  constructor(celsius) {
+    this.#celsius = celsius;
+  }
+
+  // Getter — access like a property, not a function
+  get fahrenheit() {
+    return (this.#celsius * 9/5) + 32;
+  }
+
+  // Setter — validate before setting
+  set celsius(value) {
+    if (value < -273.15) {
+      throw new Error("Below absolute zero!");
+    }
+    this.#celsius = value;
+  }
+
+  get celsius() {
+    return this.#celsius;
+  }
+}
+
+const temp = new Temperature(100);
+console.log(temp.fahrenheit);  // 212 (no parentheses needed!)
+console.log(temp.celsius);     // 100
+
+temp.celsius = 0;              // Uses the setter
+console.log(temp.fahrenheit);  // 32
+// temp.#celsius = 500;        // ❌ Error! Private field</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Animation: Class Factory -->
+            <div class="interactive-demo">
+                <div class="demo-header">
+                    <span class="demo-badge">🎮 Interactive Demo</span>
+                    <h3>Class → Object Factory</h3>
+                    <p>See how a Class blueprint creates Object instances! Click to create objects.</p>
+                </div>
+                <div class="demo-area oop-demo">
+                    <div class="oop-blueprint">
+                        <div class="oop-blueprint-header">📐 Class Blueprint</div>
+                        <div class="oop-blueprint-body">
+                            <div class="oop-class-name">class <span>Animal</span></div>
+                            <div class="oop-prop">name: <span class="oop-placeholder">string</span></div>
+                            <div class="oop-prop">sound: <span class="oop-placeholder">string</span></div>
+                            <div class="oop-method">speak() → "...says ...!"</div>
+                        </div>
+                    </div>
+                    <div class="oop-arrow-area">
+                        <div class="oop-create-arrow" id="oopArrow">⚡ new</div>
+                        <button class="demo-btn" onclick="createOOPObject()">🏭 Create Object</button>
+                    </div>
+                    <div class="oop-objects" id="oopObjects">
+                        <div class="oop-empty-msg" id="oopEmptyMsg">No objects yet — click "Create Object"!</div>
+                    </div>
+                </div>
+                <div class="demo-log" id="oopDemoLog">👆 Click "Create Object" to see how classes instantiate objects!</div>
+            </div>
+
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>🚀 Try It Yourself</h3>
+                    <p>Create your own classes and objects:</p>
+                </div>
+                <div class="code-editor-container">
+                    <div class="editor-toolbar">
+                        <span class="editor-lang">JavaScript</span>
+                        <div class="editor-actions">
+                            <button class="btn-reset" onclick="resetEditor('oop')">↺ Reset</button>
+                            <button class="btn-run" onclick="runCode('oop')">▶ Run Code</button>
+                        </div>
+                    </div>
+                    <textarea class="code-editor" id="editor-oop" spellcheck="false">// 🏭 Class Definition — A Bank Account
+class BankAccount {
+  #balance; // Private field — can't access directly
+
+  constructor(owner, balance = 0) {
+    this.owner = owner;
+    this.#balance = balance;
+  }
+
+  deposit(amount) {
+    this.#balance += amount;
+    console.log(`💰 Deposited $${amount}`);
+    return this; // Allow method chaining!
+  }
+
+  withdraw(amount) {
+    if (amount > this.#balance) {
+      console.log("❌ Insufficient funds!");
+      return this;
+    }
+    this.#balance -= amount;
+    console.log(`💸 Withdrew $${amount}`);
+    return this;
+  }
+
+  getBalance() {
+    return this.#balance;
+  }
+
+  toString() {
+    return `${this.owner}'s Account: $${this.#balance}`;
+  }
+}
+
+// 🧬 Inheritance — Savings Account adds interest
+class SavingsAccount extends BankAccount {
+  constructor(owner, balance, interestRate) {
+    super(owner, balance);     // Call parent constructor
+    this.interestRate = interestRate;
+  }
+
+  addInterest() {
+    const interest = this.getBalance() * this.interestRate;
+    this.deposit(interest);
+    console.log(`📈 Interest earned: $${interest.toFixed(2)}`);
+  }
+}
+
+// 🚀 Using our classes
+const account = new SavingsAccount("Alice", 1000, 0.05);
+console.log(account.toString());
+
+// Method chaining — deposit, then withdraw
+account.deposit(500).withdraw(200);
+console.log(account.toString());
+
+// Add interest
+account.addInterest();
+console.log(account.toString());</textarea>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <span>📋 Output</span>
+                            <button class="btn-clear-output" onclick="clearOutput('oop')">Clear</button>
+                        </div>
+                        <pre class="output-display" id="output-oop"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PROMISES ========== -->
+        <section class="topic-section" id="promises" data-topic="promises" style="display:none;">
+            <div class="section-hero">
+                <div class="hero-badge">Module 6</div>
+                <h2 class="section-title">Promises</h2>
+                <p class="section-subtitle">Handle asynchronous operations elegantly — understand resolve, reject, chaining, and parallel execution.</p>
+            </div>
+
+            <div class="beginner-intro">
+                <div class="intro-icon">💡</div>
+                <div class="intro-content">
+                    <h3>What is Asynchronous Code?</h3>
+                    <p>Some operations take time — loading data from a server, reading a file, or waiting for a user action. <strong>Synchronous</strong> code waits for each task to finish before moving on (like standing in a single checkout line). <strong>Asynchronous</strong> code can start a task and move on to other things while waiting (like ordering food and browsing your phone while it's being prepared).</p>
+                    <p>A <strong>Promise</strong> is JavaScript's way of saying "I'll get back to you with the result later." It's a placeholder for a value that doesn't exist yet.</p>
+                </div>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🤝</span>
+                        <h3>Promise Basics</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Understanding the three states</h4>
+                        <p>A Promise is like an online order. Once placed, it's in one of three states:</p>
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Pending ⏳</strong> — The order has been placed, waiting for the result</li>
+                        <li><strong>Fulfilled ✅</strong> — The order was delivered successfully (<code>resolve</code> was called)</li>
+                        <li><strong>Rejected ❌</strong> — The order failed or was cancelled (<code>reject</code> was called)</li>
+                    </ul>
+                    <div class="code-snippet">
+                        <pre><code>// Creating a Promise
+const myPromise = new Promise((resolve, reject) => {
+  // Simulate an async operation (like an API call)
+  const success = true;
+  
+  setTimeout(() => {
+    if (success) {
+      resolve("Data loaded! ✅");  // Success!
+    } else {
+      reject("Network error ❌");  // Failed!
+    }
+  }, 1000);
+});
+
+// Handling the result
+myPromise
+  .then(result => console.log(result))   // Runs if resolved
+  .catch(error => console.log(error))    // Runs if rejected
+  .finally(() => console.log("Done!"));  // Always runs</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World Analogy</span>
+                        <p>A Promise is like ordering food delivery: the order is <em>pending</em> until it's either <em>delivered</em> (resolved) or <em>cancelled</em> (rejected). <code>.then()</code> is your plan for when food arrives, <code>.catch()</code> is your backup plan if it doesn't.</p>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">⛓️</span>
+                        <h3>Promise Chaining</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Running async operations in sequence</h4>
+                        <p>Each <code>.then()</code> returns a new Promise, so you can chain them together. This lets you run async operations one after another, each using the result of the previous one.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Each step uses the result of the previous step
+fetchUser(1)
+  .then(user => {
+    console.log("Got user:", user.name);
+    return fetchPosts(user.id);  // Return a new promise
+  })
+  .then(posts => {
+    console.log("Got posts:", posts.length);
+    return fetchComments(posts[0].id);
+  })
+  .then(comments => {
+    console.log("Got comments:", comments.length);
+  })
+  .catch(err => {
+    // Catches errors from ANY step above!
+    console.error("Something failed:", err);
+  })
+  .finally(() => {
+    console.log("All done, success or failure!");
+  });</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World Analogy</span>
+                        <p>Like an assembly line in a factory — each station does its work and passes the result to the next station. If anything breaks, the whole line stops and the error handler deals with it.</p>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🏎️</span>
+                        <h3>Promise.all & Promise.race</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Running multiple promises at once</h4>
+                        <p>Sometimes you need to run several async tasks simultaneously. JavaScript provides utility methods to handle this.</p>
+                    </div>
+                    <ul class="concept-list">
+                        <li><code>Promise.all()</code> — Waits for ALL promises to succeed. Fails if ANY one fails.</li>
+                        <li><code>Promise.race()</code> — Returns the result of whichever promise finishes FIRST.</li>
+                        <li><code>Promise.allSettled()</code> — Waits for ALL, reports each as "fulfilled" or "rejected".</li>
+                        <li><code>Promise.any()</code> — Returns the first one that SUCCEEDS (ignores failures).</li>
+                    </ul>
+                    <div class="code-snippet">
+                        <pre><code>const fast = new Promise(r => setTimeout(() => r("Fast ⚡"), 500));
+const slow = new Promise(r => setTimeout(() => r("Slow 🐢"), 2000));
+
+// Wait for ALL to finish
+Promise.all([fast, slow])
+  .then(results => console.log("All:", results));
+// After 2s: All: ["Fast ⚡", "Slow 🐢"]
+
+// Get whichever finishes FIRST
+Promise.race([fast, slow])
+  .then(winner => console.log("Winner:", winner));
+// After 0.5s: Winner: "Fast ⚡"</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World</span>
+                        <p><code>Promise.all</code>: Load a user's profile, settings, AND notifications all at once. <code>Promise.race</code>: Set a timeout for slow API calls — if it doesn't respond in 5 seconds, show an error.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Animation: Promise Lifecycle -->
+            <div class="interactive-demo">
+                <div class="demo-header">
+                    <span class="demo-badge">🎮 Interactive Demo</span>
+                    <h3>Promise Lifecycle</h3>
+                    <p>Watch a Promise move through its states! Choose to resolve or reject it.</p>
+                </div>
+                <div class="demo-area promise-demo">
+                    <div class="promise-visual">
+                        <div class="promise-state-track">
+                            <div class="promise-node promise-pending active" id="promiseNodePending">
+                                <div class="promise-node-icon">⏳</div>
+                                <div class="promise-node-label">Pending</div>
+                            </div>
+                            <div class="promise-connector" id="promiseConnector1"></div>
+                            <div class="promise-node promise-fulfilled" id="promiseNodeFulfilled">
+                                <div class="promise-node-icon">✅</div>
+                                <div class="promise-node-label">Fulfilled</div>
+                            </div>
+                            <div class="promise-node promise-rejected" id="promiseNodeRejected">
+                                <div class="promise-node-icon">❌</div>
+                                <div class="promise-node-label">Rejected</div>
+                            </div>
+                        </div>
+                        <div class="promise-data-box" id="promiseDataBox">
+                            <div class="promise-data-label">Promise Value</div>
+                            <div class="promise-data-value" id="promiseDataValue">⏳ Waiting...</div>
+                        </div>
+                    </div>
+                    <div class="promise-controls">
+                        <button class="demo-btn demo-btn-success" onclick="animPromiseResolve()">✅ Resolve</button>
+                        <button class="demo-btn demo-btn-danger" onclick="animPromiseReject()">❌ Reject</button>
+                        <button class="demo-btn demo-btn-secondary" onclick="animPromiseReset()">↺ Reset</button>
+                    </div>
+                </div>
+                <div class="demo-log" id="promiseDemoLog">👆 Click Resolve or Reject to see the Promise lifecycle!</div>
+            </div>
+
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>🚀 Try It Yourself</h3>
+                    <p>Create and chain promises:</p>
+                </div>
+                <div class="code-editor-container">
+                    <div class="editor-toolbar">
+                        <span class="editor-lang">JavaScript</span>
+                        <div class="editor-actions">
+                            <button class="btn-reset" onclick="resetEditor('promises')">↺ Reset</button>
+                            <button class="btn-run" onclick="runCode('promises')">▶ Run Code</button>
+                        </div>
+                    </div>
+                    <textarea class="code-editor" id="editor-promises" spellcheck="false">// 🤝 Creating a Promise
+function fetchUserData(userId) {
+  return new Promise((resolve, reject) => {
+    console.log("⏳ Fetching user...");
+    setTimeout(() => {
+      if (userId > 0) {
+        resolve({ id: userId, name: "Alice", role: "Developer" });
+      } else {
+        reject("Invalid user ID!");
+      }
+    }, 1000);
+  });
+}
+
+function fetchUserPosts(user) {
+  return new Promise(resolve => {
+    console.log(`⏳ Fetching posts for ${user.name}...`);
+    setTimeout(() => {
+      resolve([
+        { title: "Learning Promises", likes: 42 },
+        { title: "JS Tips & Tricks", likes: 99 }
+      ]);
+    }, 1000);
+  });
+}
+
+// ⛓️ Promise Chaining
+fetchUserData(1)
+  .then(user => {
+    console.log("✅ User:", JSON.stringify(user));
+    return fetchUserPosts(user);
+  })
+  .then(posts => {
+    console.log("✅ Posts:");
+    posts.forEach(p => console.log(`   📄 ${p.title} (${p.likes} likes)`));
+  })
+  .catch(err => console.log("❌ Error:", err))
+  .finally(() => console.log("🏁 All done!"));</textarea>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <span>📋 Output</span>
+                            <button class="btn-clear-output" onclick="clearOutput('promises')">Clear</button>
+                        </div>
+                        <pre class="output-display" id="output-promises"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ASYNC/AWAIT ========== -->
+        <section class="topic-section" id="async" data-topic="async" style="display:none;">
+            <div class="section-hero">
+                <div class="hero-badge">Module 7</div>
+                <h2 class="section-title">Async / Await</h2>
+                <p class="section-subtitle">Write asynchronous code that reads like synchronous code — cleaner, more intuitive, and easier to debug.</p>
+            </div>
+
+            <div class="beginner-intro">
+                <div class="intro-icon">💡</div>
+                <div class="intro-content">
+                    <h3>Why async/await instead of .then()?</h3>
+                    <p>Async/await is just <strong>syntactic sugar</strong> (a nicer way to write the same thing) on top of Promises. Instead of chaining <code>.then()</code> calls, you write code that looks like normal, step-by-step code. It's easier to read, easier to debug, and easier to handle errors.</p>
+                </div>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">⏸️</span>
+                        <h3>async / await Basics</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Two keywords that change everything</h4>
+                        <p><code>async</code> marks a function as asynchronous (it will return a Promise). <code>await</code> pauses the function until a Promise resolves, then gives you the result — no callbacks needed!</p>
+                    </div>
+                    <div class="step-breakdown">
+                        <h4>🔍 How async/await works</h4>
+                        <ol>
+                            <li>Mark the function with <code>async</code> — this tells JavaScript the function contains asynchronous code</li>
+                            <li>Use <code>await</code> before any Promise — JavaScript pauses HERE until the Promise resolves</li>
+                            <li>The resolved value is returned directly — no <code>.then()</code> needed!</li>
+                            <li>Wrap in <code>try/catch</code> for error handling — replaces <code>.catch()</code></li>
+                        </ol>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// ❌ Without async/await (Promise chains)
+function getUser() {
+  return fetch("/api/user")
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      return data;
+    })
+    .catch(err => console.error(err));
+}
+
+// ✅ With async/await (much cleaner!)
+async function getUser() {
+  try {
+    const res = await fetch("/api/user");  // Wait for response
+    const data = await res.json();          // Wait for parsing
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// Both do EXACTLY the same thing!
+// But the async version reads like a recipe: step 1, step 2...</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World Analogy</span>
+                        <p><code>await</code> is like standing in line at a coffee shop. You <strong>wait</strong> for your coffee to be made before moving on. But unlike real life, the rest of the world doesn't stop — other JavaScript code can still run while you wait!</p>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Using <code>await</code> outside an <code>async</code> function</strong> — <code>await</code> only works inside functions marked with <code>async</code></li>
+                            <li><strong>Forgetting <code>await</code></strong> — Without it, you get a Promise object instead of the actual value</li>
+                            <li><strong>Sequential when parallel is better</strong> — Using <code>await</code> one after another when the operations don't depend on each other. Use <code>Promise.all()</code> instead!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🛡️</span>
+                        <h3>Error Handling with try/catch</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Gracefully handling failures</h4>
+                        <p><code>try/catch</code> wraps risky code in a safety net. If anything in the <code>try</code> block throws an error, instead of crashing your program, the code jumps to the <code>catch</code> block where you can handle it.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>async function fetchData(url) {
+  try {
+    // try block — the "risky" code
+    const response = await fetch(url);
+    
+    // Check if response was OK (status 200-299)
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    return data;
+    
+  } catch (error) {
+    // catch block — handles ANY error from above
+    console.error("❌ Failed to fetch:", error.message);
+    return null;  // Return a fallback value
+    
+  } finally {
+    // finally block — ALWAYS runs, success or failure
+    console.log("🏁 Fetch attempt complete");
+  }
+}
+
+// Usage
+const data = await fetchData("https://api.example.com/users");
+if (data) {
+  console.log("Got data!", data);
+} else {
+  console.log("Using cached data instead...");
+}</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World</span>
+                        <p>Always wrap API calls in try/catch — networks fail, servers go down, and data can be malformed. Good error handling is what separates amateur code from professional code.</p>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🏎️</span>
+                        <h3>Parallel vs Sequential</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Speed up your async code</h4>
+                        <p>When tasks don't depend on each other, run them in <strong>parallel</strong> instead of one-by-one. This can dramatically reduce loading times!</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// ❌ SLOW — Sequential (each waits for the previous)
+async function loadPageSlow() {
+  const users = await fetch("/api/users");    // Wait 1 sec
+  const posts = await fetch("/api/posts");    // Wait 1 sec
+  const comments = await fetch("/api/comments"); // Wait 1 sec
+  // Total: ~3 seconds! 😱
+}
+
+// ✅ FAST — Parallel (all start at the same time!)
+async function loadPageFast() {
+  const [users, posts, comments] = await Promise.all([
+    fetch("/api/users"),      // All three start
+    fetch("/api/posts"),      // at the same
+    fetch("/api/comments"),   // time!
+  ]);
+  // Total: ~1 second! 🚀
+}
+
+// Use sequential ONLY when step 2 needs step 1's result:
+async function loadUserAndPosts() {
+  const user = await fetch("/api/user/1");     // Need user first
+  const posts = await fetch(`/api/posts?user=${user.id}`); // Then their posts
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Animation: Async Timeline -->
+            <div class="interactive-demo">
+                <div class="demo-header">
+                    <span class="demo-badge">🎮 Interactive Demo</span>
+                    <h3>Sync vs Async Execution</h3>
+                    <p>See how synchronous and asynchronous code execute differently!</p>
+                </div>
+                <div class="demo-area async-demo">
+                    <div class="async-comparison">
+                        <div class="async-col">
+                            <div class="async-col-header sync-header">⬇️ Synchronous</div>
+                            <div class="async-timeline" id="syncTimeline">
+                                <div class="async-step" id="syncStep1">
+                                    <span class="step-num">1</span> console.log("Start")
+                                </div>
+                                <div class="async-step" id="syncStep2">
+                                    <span class="step-num">2</span> heavyTask() <span class="step-time">⏱ 3s</span>
+                                </div>
+                                <div class="async-step" id="syncStep3">
+                                    <span class="step-num">3</span> console.log("End")
+                                </div>
+                            </div>
+                            <div class="async-total" id="syncTotal">Total: <strong>?</strong></div>
+                        </div>
+                        <div class="async-col">
+                            <div class="async-col-header async-header">⚡ Asynchronous</div>
+                            <div class="async-timeline" id="asyncTimeline">
+                                <div class="async-step" id="asyncStep1">
+                                    <span class="step-num">1</span> console.log("Start")
+                                </div>
+                                <div class="async-step" id="asyncStep2">
+                                    <span class="step-num">2</span> await fetchData() <span class="step-time">⏱ 3s</span>
+                                </div>
+                                <div class="async-step" id="asyncStep3">
+                                    <span class="step-num">3</span> console.log("End")
+                                </div>
+                            </div>
+                            <div class="async-total" id="asyncTotal">Total: <strong>?</strong></div>
+                        </div>
+                    </div>
+                    <div class="async-controls">
+                        <button class="demo-btn" onclick="runAsyncDemo()">▶ Run Both</button>
+                        <button class="demo-btn demo-btn-secondary" onclick="resetAsyncDemo()">↺ Reset</button>
+                    </div>
+                </div>
+                <div class="demo-log" id="asyncDemoLog">👆 Click "Run Both" to compare sync vs async execution!</div>
+            </div>
+
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>🚀 Try It Yourself</h3>
+                    <p>Fetch real data from a public API:</p>
+                </div>
+                <div class="code-editor-container">
+                    <div class="editor-toolbar">
+                        <span class="editor-lang">JavaScript</span>
+                        <div class="editor-actions">
+                            <button class="btn-reset" onclick="resetEditor('async')">↺ Reset</button>
+                            <button class="btn-run" onclick="runCode('async')">▶ Run Code</button>
+                        </div>
+                    </div>
+                    <textarea class="code-editor" id="editor-async" spellcheck="false">// 🌐 Real-World API Example
+// Fetching dummy user data
+
+async function fetchUsers() {
+  console.log("⏳ Fetching users from API...");
+  
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+    const users = await response.json();
+    
+    console.log(`✅ Found ${users.length} users:\n`);
+    
+    users.slice(0, 5).forEach(user => {
+      console.log(`👤 ${user.name}`);
+      console.log(`   📧 ${user.email}`);
+      console.log(`   🏢 ${user.company.name}\n`);
+    });
+  } catch (error) {
+    console.log("❌ Error:", error.message);
+  }
+}
+
+// 🏎️ Parallel Fetching
+async function fetchParallel() {
+  console.log("⏳ Fetching users & posts in parallel...\n");
+  
+  const [usersRes, postsRes] = await Promise.all([
+    fetch("https://jsonplaceholder.typicode.com/users"),
+    fetch("https://jsonplaceholder.typicode.com/posts")
+  ]);
+  
+  const users = await usersRes.json();
+  const posts = await postsRes.json();
+  
+  console.log(`✅ ${users.length} users, ${posts.length} posts loaded!`);
+}
+
+// Run them
+await fetchUsers();
+console.log("---");
+await fetchParallel();</textarea>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <span>📋 Output</span>
+                            <button class="btn-clear-output" onclick="clearOutput('async')">Clear</button>
+                        </div>
+                        <pre class="output-display" id="output-async"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ERROR HANDLING ========== -->
+        <section class="topic-section" id="errorhandling" data-topic="errorhandling" style="display:none;">
+            <div class="section-hero">
+                <div class="hero-badge">Module 8</div>
+                <h2 class="section-title">Error Handling</h2>
+                <p class="section-subtitle">Write robust code that gracefully handles unexpected situations instead of crashing.</p>
+            </div>
+
+            <div class="beginner-intro">
+                <div class="intro-icon">💡</div>
+                <div class="intro-content">
+                    <h3>Why is error handling important?</h3>
+                    <p>Errors are inevitable — users type invalid input, networks fail, APIs return unexpected data. Without error handling, your entire application crashes. With it, you can show friendly error messages, retry operations, or fall back to default behavior. <strong>Professional developers write error handling BEFORE it's needed.</strong></p>
+                </div>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🛡️</span>
+                        <h3>try / catch / finally</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 The safety net for your code</h4>
+                        <p><code>try</code> attempts to run risky code. If anything goes wrong, <code>catch</code> handles the error. <code>finally</code> runs cleanup code regardless of success or failure.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Basic try/catch
+try {
+  // Risky code goes here
+  const data = JSON.parse('{"name": "Alice"}');
+  console.log("✅ Parsed:", data.name);
+  
+  // This will throw an error!
+  const bad = JSON.parse("not valid JSON");
+} catch (error) {
+  // Runs ONLY if an error occurs
+  console.log("❌ Error type:", error.name);
+  console.log("❌ Message:", error.message);
+} finally {
+  // ALWAYS runs (cleanup)
+  console.log("🏁 Finished processing");
+}
+
+// Custom error throwing
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error("Cannot divide by zero!");
+  }
+  return a / b;
+}
+
+try {
+  console.log(divide(10, 2));  // 5
+  console.log(divide(10, 0));  // Throws!
+} catch (e) {
+  console.log("Caught:", e.message);
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">📋</span>
+                        <h3>Error Types</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Different errors for different problems</h4>
+                        <p>JavaScript has several built-in error types. Knowing them helps you write more specific error handling and give better error messages to users.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// TypeError — wrong type of operation
+// let x = null;
+// x.toString();  // TypeError: cannot read property of null
+
+// ReferenceError — variable doesn't exist
+// console.log(abc);  // ReferenceError: abc is not defined
+
+// SyntaxError — invalid code structure
+// eval("if (");  // SyntaxError: Unexpected end of input
+
+// RangeError — value out of allowed range
+// new Array(-1);  // RangeError: Invalid array length
+
+// Custom Error class for your app
+class ValidationError extends Error {
+  constructor(field, message) {
+    super(message);
+    this.name = "ValidationError";
+    this.field = field;
+  }
+}
+
+function validateAge(age) {
+  if (typeof age !== "number") {
+    throw new ValidationError("age", "Age must be a number");
+  }
+  if (age < 0 || age > 150) {
+    throw new ValidationError("age", "Age must be 0-150");
+  }
+  return true;
+}
+
+try {
+  validateAge("twenty");
+} catch (e) {
+  if (e instanceof ValidationError) {
+    console.log(`Field '${e.field}': ${e.message}`);
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🔄</span>
+                        <h3>Defensive Programming</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Prevent errors before they happen</h4>
+                        <p>The best errors are the ones you never encounter! Use <strong>guard clauses</strong>, <strong>default values</strong>, and <strong>type checking</strong> to prevent errors proactively.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// Guard clause — return early if inputs are bad
+function getDiscount(price, percentage) {
+  if (typeof price !== "number" || price < 0) return 0;
+  if (typeof percentage !== "number") return price;
+  
+  return price * (1 - percentage / 100);
+}
+
+// Optional chaining — safely access nested properties
+const user = { profile: { address: { city: "NYC" } } };
+console.log(user?.profile?.address?.city);     // "NYC"
+console.log(user?.settings?.theme);            // undefined (no crash!)
+
+// Nullish coalescing — provide defaults
+const theme = user?.settings?.theme ?? "light";
+console.log(theme);  // "light" (the default)
+
+// Default parameters
+function greet(name = "Guest", greeting = "Hello") {
+  return `${greeting}, ${name}!`;
+}
+console.log(greet());            // "Hello, Guest!"
+console.log(greet("Alice"));     // "Hello, Alice!"</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>🚀 Try It Yourself</h3>
+                    <p>Practice error handling patterns:</p>
+                </div>
+                <div class="code-editor-container">
+                    <div class="editor-toolbar">
+                        <span class="editor-lang">JavaScript</span>
+                        <div class="editor-actions">
+                            <button class="btn-reset" onclick="resetEditor('errorhandling')">↺ Reset</button>
+                            <button class="btn-run" onclick="runCode('errorhandling')">▶ Run Code</button>
+                        </div>
+                    </div>
+                    <textarea class="code-editor" id="editor-errorhandling" spellcheck="false">// 🛡️ Error Handling in Practice
+
+// 1. Safe JSON parsing
+function safeJsonParse(jsonString) {
+  try {
+    return { data: JSON.parse(jsonString), error: null };
+  } catch (e) {
+    return { data: null, error: e.message };
+  }
+}
+
+// Test with valid JSON
+const good = safeJsonParse('{"name":"Alice","age":25}');
+console.log("✅ Valid:", good.data);
+
+// Test with invalid JSON  
+const bad = safeJsonParse("this is not JSON");
+console.log("❌ Invalid:", bad.error);
+
+// 2. Input validation function
+function createUser(name, email, age) {
+  const errors = [];
+  
+  if (!name || name.trim().length < 2) {
+    errors.push("Name must be at least 2 characters");
+  }
+  if (!email || !email.includes("@")) {
+    errors.push("Invalid email address");
+  }
+  if (typeof age !== "number" || age < 0 || age > 150) {
+    errors.push("Age must be a number between 0-150");
+  }
+  
+  if (errors.length > 0) {
+    throw new Error("Validation failed:\n  • " + errors.join("\n  • "));
+  }
+  
+  return { name, email, age, createdAt: new Date().toISOString() };
+}
+
+// Test valid user
+console.log("\n--- Creating Users ---");
+try {
+  const user = createUser("Alice", "alice@example.com", 25);
+  console.log("✅ Created:", user);
+} catch (e) {
+  console.log("❌", e.message);
+}
+
+// Test invalid user
+try {
+  const user = createUser("", "bad-email", -5);
+  console.log("✅ Created:", user);
+} catch (e) {
+  console.log("❌", e.message);
+}
+
+// 3. Optional chaining demo
+console.log("\n--- Safe Property Access ---");
+const config = { database: { host: "localhost" } };
+console.log("Host:", config?.database?.host ?? "not set");
+console.log("Port:", config?.database?.port ?? "not set");
+console.log("Cache:", config?.cache?.ttl ?? "not set");</textarea>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <span>📋 Output</span>
+                            <button class="btn-clear-output" onclick="clearOutput('errorhandling')">Clear</button>
+                        </div>
+                        <pre class="output-display" id="output-errorhandling"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== DOM ========== -->
+        <section class="topic-section" id="dom" data-topic="dom" style="display:none;">
+            <div class="section-hero">
+                <div class="hero-badge">Module 9</div>
+                <h2 class="section-title">DOM Manipulation</h2>
+                <p class="section-subtitle">Interact with web pages dynamically — select elements, handle events & update content in real-time.</p>
+            </div>
+
+            <div class="beginner-intro">
+                <div class="intro-icon">💡</div>
+                <div class="intro-content">
+                    <h3>What is the DOM?</h3>
+                    <p>The <strong>DOM (Document Object Model)</strong> is a tree-like representation of your HTML page that JavaScript can interact with. Every HTML element becomes a "node" in this tree. JavaScript can find these nodes, change their content, add new ones, remove them, and respond to user clicks, typing, and scrolling. This is how all interactive websites work!</p>
+                </div>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🎯</span>
+                        <h3>Selectors — Finding Elements</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 First, you need to "grab" the element</h4>
+                        <p>Before you can change anything on a page, you need to select it. JavaScript provides several methods to find HTML elements, just like CSS selectors target elements for styling.</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>// ✅ Modern selectors (RECOMMENDED — use these!)
+document.querySelector(".my-class");     // First matching element
+document.querySelectorAll("li");         // ALL matching elements
+document.querySelector("#myId");         // By ID
+document.querySelector("div.card > h2"); // Complex CSS selectors work!
+
+// 🔙 Classic selectors (still work, but less flexible)
+document.getElementById("myId");
+document.getElementsByClassName("myClass"); // Returns live collection
+document.getElementsByTagName("div");       // Returns live collection
+
+// 💡 Tip: querySelector uses the SAME selectors you know from CSS!
+// If you can select it in CSS, you can select it with querySelector</code></pre>
+                    </div>
+                    <div class="common-mistakes">
+                        <h4>⚠️ Common Beginner Mistakes</h4>
+                        <ul>
+                            <li><strong>Script runs before HTML loads</strong> — Put your <code>&lt;script&gt;</code> at the end of <code>&lt;body&gt;</code>, or use <code>DOMContentLoaded</code> event</li>
+                            <li><strong>Forgetting the <code>#</code> or <code>.</code></strong> — <code>querySelector("myId")</code> looks for a tag called <code>&lt;myId&gt;</code>. Use <code>querySelector("#myId")</code>!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">🖱️</span>
+                        <h3>Events — Responding to Users</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Making your page interactive</h4>
+                        <p>Events are things that happen on the page — clicks, typing, scrolling, hovering. You can "listen" for events and run code when they occur. This is the foundation of all web interactivity!</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>const btn = document.querySelector("#myBtn");
+
+// addEventListener is the modern way
+btn.addEventListener("click", (event) => {
+  console.log("Clicked!", event.target);
+});
+
+// Common events you'll use:
+// 🖱️ Mouse: click, dblclick, mouseover, mouseout, mousemove
+// ⌨️ Keyboard: keydown, keyup, keypress
+// 📝 Form: input, change, submit, focus, blur
+// 🪟 Window: scroll, resize, load
+
+// Remove an event listener
+function handleClick() { console.log("Clicked!"); }
+btn.addEventListener("click", handleClick);
+btn.removeEventListener("click", handleClick); // Clean up!
+
+// Event delegation — handle events on parent
+document.querySelector("#list").addEventListener("click", (e) => {
+  if (e.target.tagName === "LI") {
+    console.log("Clicked:", e.target.textContent);
+  }
+});</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World</span>
+                        <p>Every button, form, dropdown, search bar, and interactive widget on the web uses event listeners. Even scrolling-triggered animations (like elements fading in as you scroll) use the <code>scroll</code> event!</p>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-header">
+                        <span class="concept-icon">✏️</span>
+                        <h3>Dynamic Updates</h3>
+                    </div>
+                    <div class="what-why">
+                        <h4>📖 Changing the page without reloading</h4>
+                        <p>You can modify any aspect of a page dynamically: text content, HTML, styles, classes, attributes. You can even create entirely new elements and add them to the page!</p>
+                    </div>
+                    <div class="code-snippet">
+                        <pre><code>const el = document.querySelector("#box");
+
+// Change content
+el.textContent = "New text";              // Just text
+el.innerHTML = "<strong>Bold!</strong>"; // HTML content
+
+// Change styles
+el.style.backgroundColor = "#3b82f6";
+el.style.padding = "20px";
+el.style.borderRadius = "12px";
+
+// Add/remove CSS classes (BETTER than inline styles!)
+el.classList.add("active");
+el.classList.remove("hidden");
+el.classList.toggle("highlighted"); // Toggle on/off
+
+// Create new elements
+const newCard = document.createElement("div");
+newCard.className = "card";
+newCard.textContent = "I was created by JavaScript!";
+document.querySelector("#container").appendChild(newCard);
+
+// Remove an element
+el.remove();  // Removes itself from the page</code></pre>
+                    </div>
+                    <div class="real-world-example">
+                        <span class="rw-badge">🌍 Real World</span>
+                        <p>Gmail, Twitter, and Notion update the DOM constantly without full page reloads. When you compose an email, every keystroke is JavaScript updating the DOM in real-time.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live DOM Playground -->
+            <div class="dom-playground">
+                <div class="editor-header">
+                    <h3>🎮 Live DOM Playground</h3>
+                    <p>Click the buttons below and watch the DOM change in real-time!</p>
+                </div>
+                <div class="dom-demo-container">
+                    <div class="dom-preview-area" id="domPreview">
+                        <div class="dom-target-box" id="domTargetBox">
+                            <p id="domTargetText">Hello! I'm a DOM element 👋</p>
+                        </div>
+                        <div class="dom-list-container" id="domListContainer">
+                            <h4>My List:</h4>
+                            <ul id="domList">
+                                <li>Item 1</li>
+                                <li>Item 2</li>
+                            </ul>
+                        </div>
+                        <div id="domCounter" class="dom-counter-display">Counter: <span id="counterValue">0</span></div>
+                    </div>
+                    <div class="dom-controls">
+                        <h4>DOM Controls</h4>
+                        <div class="dom-btn-grid">
+                            <button class="dom-btn" id="domBtnText" onclick="domChangeText()">✏️ Change Text</button>
+                            <button class="dom-btn" id="domBtnColor" onclick="domChangeColor()">🎨 Change Color</button>
+                            <button class="dom-btn" id="domBtnSize" onclick="domToggleSize()">📐 Toggle Size</button>
+                            <button class="dom-btn" id="domBtnAdd" onclick="domAddItem()">➕ Add Item</button>
+                            <button class="dom-btn" id="domBtnRemove" onclick="domRemoveItem()">➖ Remove Item</button>
+                            <button class="dom-btn" id="domBtnCount" onclick="domIncrement()">🔢 Increment</button>
+                            <button class="dom-btn" id="domBtnAnimate" onclick="domAnimate()">🎬 Animate</button>
+                            <button class="dom-btn dom-btn-reset" id="domBtnReset" onclick="domReset()">↺ Reset All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-section">
+                <div class="editor-header">
+                    <h3>🚀 Try It Yourself</h3>
+                    <p>Write DOM manipulation code (uses the playground above!):</p>
+                </div>
+                <div class="code-editor-container">
+                    <div class="editor-toolbar">
+                        <span class="editor-lang">JavaScript</span>
+                        <div class="editor-actions">
+                            <button class="btn-reset" onclick="resetEditor('dom')">↺ Reset</button>
+                            <button class="btn-run" onclick="runCode('dom')">▶ Run Code</button>
+                        </div>
+                    </div>
+                    <textarea class="code-editor" id="editor-dom" spellcheck="false">// 🎯 DOM Manipulation Examples
+// These work on the playground above!
+
+// Change the target box text
+const box = document.getElementById("domTargetText");
+box.textContent = "I was changed by code! 🎉";
+
+// Change background color
+const targetBox = document.getElementById("domTargetBox");
+targetBox.style.background = "linear-gradient(135deg, #667eea, #764ba2)";
+targetBox.style.color = "white";
+
+// Add a new list item
+const list = document.getElementById("domList");
+const newItem = document.createElement("li");
+newItem.textContent = "Added by code! ✨";
+newItem.style.color = "#10b981";
+newItem.style.fontWeight = "bold";
+list.appendChild(newItem);
+
+// Update counter
+const counter = document.getElementById("counterValue");
+counter.textContent = "42";
+counter.style.color = "#f59e0b";
+counter.style.fontSize = "1.5rem";
+
+console.log("✅ DOM updated successfully!");
+console.log("Check the playground above to see the changes.");</textarea>
+                    <div class="output-container">
+                        <div class="output-header">
+                            <span>📋 Output</span>
+                            <button class="btn-clear-output" onclick="clearOutput('dom')">Clear</button>
+                        </div>
+                        <pre class="output-display" id="output-dom"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PRACTICE ========== -->
+        <section class="topic-section" id="practice" data-topic="practice" style="display:none;">
+            <div class="section-hero">
+                <div class="hero-badge">Practice Zone</div>
+                <h2 class="section-title">Practice Exercises</h2>
+                <p class="section-subtitle">Sharpen your skills with hands-on coding challenges. Write code, run it, and compare with expected output. Start with easy and work your way up!</p>
+            </div>
+
+            <div class="exercises-container" id="exercisesContainer">
+                <!-- Exercises are rendered by JS -->
+            </div>
+        </section>
+
+        <!-- ========== QUIZ ========== -->
+        <section class="topic-section" id="quiz" data-topic="quiz" style="display:none;">
+            <div class="section-hero">
+                <div class="hero-badge">🧠 Quiz Time</div>
+                <h2 class="section-title">JavaScript Quiz</h2>
+                <p class="section-subtitle">Test your knowledge with 15 challenging questions covering all modules. Can you score 100%?</p>
+            </div>
+
+            <div class="quiz-container" id="quizContainer">
+                <!-- Quiz rendered by JS -->
+            </div>
+            <div class="quiz-results" id="quizResults" style="display:none;">
+                <div class="quiz-score-card">
+                    <div class="score-circle" id="scoreCircle">
+                        <span class="score-number" id="scoreNumber">0</span>
+                        <span class="score-label" id="scoreLabelDenom">/ 15</span>
+                    </div>
+                    <h3 id="quizResultMsg">Well Done!</h3>
+                    <p id="quizResultDetail"></p>
+                    <button class="btn-retake" onclick="resetQuiz()">🔄 Retake Quiz</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
